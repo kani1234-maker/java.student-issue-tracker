@@ -1,3 +1,57 @@
+\\Issue.java file
+class Issue {
+    int issueId;
+    String studentName;
+    String title;
+    String description;
+    String status;
+
+    Issue(int issueId, String studentName, String title, String description) {
+        this.issueId = issueId;
+        this.studentName = studentName;
+        this.title = title;
+        this.description = description;
+        this.status = "Pending";
+    }
+
+    void displayIssue() {
+        System.out.println("Issue ID: " + issueId);
+        System.out.println("Student: " + studentName);
+        System.out.println("Title: " + title);
+        System.out.println("Description: " + description);
+        System.out.println("Status: " + status);
+        System.out.println("---------------------------");
+    }
+}
+//IssueManager.java file
+import java.util.*;
+
+class IssueManager {
+
+    ArrayList<Issue> issues = new ArrayList<>();
+
+    void addIssue(Issue issue) {
+        issues.add(issue);
+    }
+
+    void viewAllIssues() {
+        for(Issue i : issues) {
+            i.displayIssue();
+        }
+    }
+
+    void updateStatus(int id, String newStatus) {
+
+        for(Issue i : issues) {
+
+            if(i.issueId == id) {
+                i.status = newStatus;
+            }
+
+        }
+    }
+}
+//Main file
 import java.util.*;
 
 public class Main {
