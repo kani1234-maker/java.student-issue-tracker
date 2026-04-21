@@ -1,9 +1,11 @@
 This is a Java-based console application that allows students to submit issues and enables tracking and updating their status.
 
 Features:
-Submit a new issue
-View all submitted issues
-Update issue status
+Submit a new issue,
+View all submitted issues,
+Update issue status,
+Priorities issues,
+Search issue by issue Id,
 Simple menu-driven interface
 
 Technologies Used:
