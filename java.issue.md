@@ -1,16 +1,19 @@
 \\Issue.java file
 class Issue {
+
     int issueId;
     String studentName;
     String title;
     String description;
+    String priority;
     String status;
 
-    Issue(int issueId, String studentName, String title, String description) {
+    Issue(int issueId, String studentName, String title, String description, String priority) {
         this.issueId = issueId;
         this.studentName = studentName;
         this.title = title;
         this.description = description;
+        this.priority = priority;
         this.status = "Pending";
     }
 
@@ -19,6 +22,7 @@ class Issue {
         System.out.println("Student: " + studentName);
         System.out.println("Title: " + title);
         System.out.println("Description: " + description);
+        System.out.println("Priority: " + priority);
         System.out.println("Status: " + status);
         System.out.println("---------------------------");
     }
@@ -35,19 +39,46 @@ class IssueManager {
     }
 
     void viewAllIssues() {
-        for(Issue i : issues) {
+        for (Issue i : issues) {
             i.displayIssue();
         }
     }
 
     void updateStatus(int id, String newStatus) {
-
-        for(Issue i : issues) {
-
-            if(i.issueId == id) {
+        for (Issue i : issues) {
+            if (i.issueId == id) {
                 i.status = newStatus;
+                System.out.println("Status updated!");
+                return;
             }
+        }
+        System.out.println("Issue not found!");
+    }
 
+    void updatePriority(int id, String newPriority) {
+        for (Issue i : issues) {
+            if (i.issueId == id) {
+                i.priority = newPriority;
+                System.out.println("Priority updated!");
+                return;
+            }
+        }
+        System.out.println("Issue not found!");
+    }
+
+    void searchIssueById(int id) {
+        boolean found = false;
+
+        for (Issue i : issues) {
+            if (i.issueId == id) {
+                i.displayIssue();
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Issue not found!");
         }
     }
 }
@@ -68,7 +99,8 @@ public class Main {
             System.out.println("1 Submit Issue");
             System.out.println("2 View Issues");
             System.out.println("3 Update Status");
-            System.out.println("4 Exit");
+            System.out.println("4 Search Issue by ID");
+            System.out.println("5 Exit");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -84,7 +116,10 @@ public class Main {
                 System.out.println("Enter Description:");
                 String desc = sc.nextLine();
 
-                Issue issue = new Issue(issueCounter++, name, title, desc);
+                System.out.println("Enter Priority (Low/Medium/High):");
+                String priority = sc.nextLine();
+
+                Issue issue = new Issue(issueCounter++, name, title, desc, priority);
                 manager.addIssue(issue);
 
             }
@@ -110,11 +145,20 @@ public class Main {
 
             else if(choice == 4) {
 
-                break;
+                System.out.println("Enter Issue ID:");
+                int id = sc.nextInt();
+                sc.nextLine();
+
+                manager.searchIssueById(id);
 
             }
 
-        }
+            else if(choice == 5) {
 
+                System.out.println("Exiting...");
+                break;
+
+            }
+        }
     }
 }
